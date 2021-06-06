@@ -72,11 +72,11 @@ font-family: "Times New Roman", Times, serif;
 font-size: 15px;
 text-align: center;
 position: absolute;
-bottom: 100px;
+bottom: 3%;
 left: 50%;
 transform: translateX(-50%);
 }
-a{color: black; font-size: 15px;}
+a{color: black; font-size: inherit;}
 
 
 .loading 
@@ -220,6 +220,9 @@ Powered by <a href="">solccomp</a> technology(Made by SikkeCompany)
 
 <script>
 
+var gas_price_gwei=5;
+
+
 function alert(alttxt)
 {
 document.getElementById('alert_text').innerHTML=alttxt;
@@ -239,7 +242,7 @@ await ethereum.enable();
 }
 catch(err)
 {
-alert("please install metamask");
+alert('please install <a href="https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn?hl=tr"> Metamask</a>');
 return;
 }
 document.getElementById("main_box_0").style.display ="none";
@@ -345,6 +348,7 @@ async function display_3()
 	document.getElementById("main_box_3_texts").innerHTML +="</br>The operation success</br>If you want recognize your token to bscscan or etherscan</br>You can download all information(solidty code version etc.) with that button.</br>By the way you can fund us some eth or bnb</br>";
 	
 	file="Contract Adress: "+contract_adress;
+	file +="\r\n\r\nCreator Adress: Your metamask adreess";
 	file +="\r\n\r\nSolidty version: 0.8.4+commit.c7e474f2.Emscripten.clang\r\n\r\n\r\nThe Code:\r\n";
 	file+=(await create_code());
 	
@@ -367,7 +371,8 @@ async function update_gas_fees()
 var text="";
 	if(document.getElementById('network').value=="main")
 	{
-	var gas_price = (parseFloat(await get_price("eth"))*0.000000001*14);
+	gas_price_gwei=14;
+	var gas_price = (parseFloat(await get_price("eth"))*0.000000001*gas_price_gwei);
 	text += "</br>Estimated gas value 941029"
 	text += "</br>Estimated price per gas "+gas_price+" USD";
 	text += "</br><b>Estimated cost " + gas_price*941029+" USD</b>";
@@ -378,7 +383,8 @@ var text="";
 	}
 	if(document.getElementById('network').value=="private")
 	{
-	var gas_price = (parseFloat(await get_price("BNB"))*0.000000001*5);
+	gas_price_gwei=7;
+	var gas_price = (parseFloat(await get_price("BNB"))*0.000000001*gas_price_gwei);
 	text += "</br>Estimated gas value 941029"
 	text += "</br>Estimated price per gas "+gas_price+" USD";
 	text += "</br><b>Estimated cost " + gas_price*941029+" USD</b>";
@@ -389,6 +395,7 @@ var text="";
 	}
 	if(document.getElementById('network').value=="rinkeby")
 	{
+	gas_price_gwei=100;
 	text = "</br>Rinkeby is test network You can get free balance from faucet</br>This video shows how to use faucet<a link href='https://www.youtube.com/watch?v=IrgrpMjdLwg'/>https://www.youtube.com/watch?v=IrgrpMjdLwg</a>";
 	}
 	document.getElementById("gas_fees").innerHTML=text;
@@ -438,7 +445,8 @@ async function deploy_and_push()
 	myContract = myContract.deploy({data: bytecode,arguments: constructorArgs});
 	var my_gas=await myContract.estimateGas()+100000;
 	console.log(my_gas);
-	var ContractInstance = myContract.send({from: account,gas: my_gas,gasPrice:'14000000000'});
+	var gas_price_str= (1000000000*gas_price_gwei).toString();
+	var ContractInstance = myContract.send({from: account,gas: my_gas,gasPrice:gas_price_str});
 	var newContractInstance = await ContractInstance;
 	return(await newContractInstance._address);
 

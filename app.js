@@ -5,13 +5,13 @@ app.use(express.static("/"));
 let port = process.env.PORT || 8080
 
 app.get('/', function(req, res) {
-    res.sendFile('index.html', {root: "/"})
+    res.sendFile('index.html')
 });
 app.get('/example_code.sol', function(req, res) {
-    res.sendFile('example_code.sol', {root: "/"})
+    res.sendFile('example_code.sol')
 });
 app.get('/dist/web3.min.js', function(req, res) {
-    res.sendFile('web3.min.js', {root: "/"})
+    res.sendFile('web3.min.js'})
 });
 app.get('/bnb_price', function(req, res) {
 	price.getCryptoPrice("USD", "BNB").then(obj => { // Base for ex - USD, Crypto for ex - ETH 

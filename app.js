@@ -11,7 +11,7 @@ app.get('/example_code.sol', function(req, res) {
     res.sendFile('example_code.sol')
 });
 app.get('/dist/web3.min.js', function(req, res) {
-    res.sendFile('web3.min.js'})
+    res.sendFile('web3.min.js')
 });
 app.get('/bnb_price', function(req, res) {
 	price.getCryptoPrice("USD", "BNB").then(obj => { // Base for ex - USD, Crypto for ex - ETH 

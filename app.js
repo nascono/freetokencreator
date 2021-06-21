@@ -24,7 +24,7 @@ app.get('/ofa.png', function(req, res) {
     res.sendFile(__dirname +'/html/ofa.png')
 });
 app.get('/our_team.html', function(req, res) {
-    res.sendFile(__dirname +'/our_team.html')
+    res.sendFile(__dirname +'/html/our_team.html')
 });
 app.get('/program.html', function(req, res) {
     res.sendFile(__dirname +'/html/program.html')
@@ -35,8 +35,8 @@ app.get('/sikke512.png', function(req, res) {
 app.get('/dist/web3.min.js', function(req, res) {
     res.sendFile(__dirname +'/html/web3.min.js')
 });
-app.get('/white_paper.html', function(req, res) {
-    res.sendFile(__dirname +'/html/white_paper.html')
+app.get('/whitepaper.html', function(req, res) {
+    res.sendFile(__dirname +'/html/whitepaper.html')
 });
 
 

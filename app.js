@@ -23,6 +23,9 @@ app.get('/index.html', function(req, res) {
 app.get('/ofa.png', function(req, res) {
     res.sendFile(__dirname +'/html/ofa.png')
 });
+app.get('/Sikkecreatoring.pdf', function(req, res) {
+    res.sendFile(__dirname +'/html/Sikkecreatoring.pdf')
+});
 app.get('/our_team.html', function(req, res) {
     res.sendFile(__dirname +'/html/our_team.html')
 });
